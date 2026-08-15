@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAKSHAK - Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: #c62828;
+            padding: 18px 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .logout {
+            background: white !important;
+            color: #c62828 !important;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .welcome h1 {
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+
+        .welcome p {
+            color: #555;
+            margin: 8px;
+        }
+
+        /* SOS */
+
+        .sos-section {
+            background: white;
+
+            margin-top: 30px;
+            padding: 30px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .sos-section h2 {
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        .sos-section p {
+            color: #666;
+        }
+
+        .sos-btn {
+            display: inline-block;
+
+            margin-top: 20px;
+
+            padding: 18px 45px;
+
+            background: #d32f2f;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-size: 20px;
+            font-weight: bold;
+
+            box-shadow:
+                0 5px 15px rgba(198,40,40,0.3);
+        }
+
+        .sos-btn:hover {
+            background: #b71c1c;
+            transform: scale(1.03);
+        }
+
+        /* QUICK ACTIONS */
+
+        .section-title {
+            text-align: center;
+            color: #c62828;
+            margin-top: 35px;
+            margin-bottom: 20px;
+        }
+
+        .cards {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+
+            width: 240px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.12);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            background: #c62828;
+            color: white;
+
+            padding: 12px 20px;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #8e0000;
+        }
+
+        .blue-btn {
+            background: #1565c0;
+        }
+
+        .blue-btn:hover {
+            background: #0d47a1;
+        }
+
+        .green-btn {
+            background: #2e7d32;
+        }
+
+        .green-btn:hover {
+            background: #1b5e20;
+        }
+
+        /* INFORMATION */
+
+        .info-box {
+            background: white;
+
+            margin-top: 35px;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .info-box h2 {
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+
+        .info-box ul {
+            padding-left: 25px;
+            line-height: 2;
+            color: #555;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+
+            background: #222;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .card {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ============================= -->
+<!-- NAVBAR -->
+<!-- ============================= -->
+
+<nav>
+
+    <div class="logo">
+        🚑 RAKSHAK
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/report">
+            Report
+        </a>
+
+        <a href="/hospital.html">
+            Hospital
+        </a>
+
+        <a href="/emergency.html">
+            Emergency
+        </a>
+
+        <a href="/logout"
+           class="logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ============================= -->
+<!-- MAIN -->
+<!-- ============================= -->
+
+<div class="container">
+
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h1>
+            👋 Welcome to RAKSHAK
+        </h1>
+
+        <p>
+            🚑 Road Accident Emergency Portal
+        </p>
+
+        <p>
+            Stay safe. Get help quickly when you need it.
+        </p>
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- SOS -->
+    <!-- ============================= -->
+
+    <div class="sos-section">
+
+        <h2>
+            🚨 Emergency SOS
+        </h2>
+
+        <p>
+            Need immediate emergency assistance?
+        </p>
+
+        <p>
+            Detect your current location and access emergency services.
+        </p>
+
+        <a href="/emergency.html"
+           class="sos-btn">
+
+            🆘 EMERGENCY SOS
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- QUICK ACTIONS -->
+    <!-- ============================= -->
+
+    <h2 class="section-title">
+        ⚡ Quick Actions
+    </h2>
+
+
+    <div class="cards">
+
+
+        <!-- REPORT -->
+
+        <div class="card">
+
+            <h2>
+                🚨 Report Accident
+            </h2>
+
+            <p>
+                Quickly report a road accident
+                with your current GPS location.
+            </p>
+
+            <a href="/report"
+               class="btn">
+
+                📝 Report Accident
+
+            </a>
+
+        </div>
+
+
+
+        <!-- HOSPITAL -->
+
+        <div class="card">
+
+            <h2>
+                🏥 Hospital
+            </h2>
+
+            <p>
+                Find emergency medical
+                assistance and nearby hospitals.
+            </p>
+
+            <a href="/hospital.html"
+               class="btn blue-btn">
+
+                🏥 Find Hospital
+
+            </a>
+
+        </div>
+
+
+
+        <!-- EMERGENCY -->
+
+        <div class="card">
+
+            <h2>
+                🚨 Emergency
+
+            </h2>
+
+            <p>
+                Quickly access ambulance,
+                police and fire services.
+            </p>
+
+            <a href="/emergency.html"
+               class="btn">
+
+                🚑 Emergency
+
+            </a>
+
+        </div>
+
+
+
+        <!-- POLICE -->
+
+        <div class="card">
+
+            <h2>
+                👮 Police
+            </h2>
+
+            <p>
+                Access accident reports and
+                emergency police services.
+            </p>
+
+            <a href="/police"
+               class="btn green-btn">
+
+                👮 Police Dashboard
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ============================= -->
+    <!-- SAFETY INFORMATION -->
+    <!-- ============================= -->
+
+    <div class="info-box">
+
+        <h2>
+            🛡️ RAKSHAK Safety Information
+        </h2>
+
+        <ul>
+
+            <li>
+                🚨 In an emergency, use the Emergency SOS option.
+            </li>
+
+            <li>
+                📍 Allow location access so your accident location can be detected.
+            </li>
+
+            <li>
+                🚑 Use the Report Accident option to submit accident details.
+            </li>
+
+            <li>
+                📞 Contact emergency services when immediate assistance is required.
+            </li>
+
+            <li>
+                🏥 Seek medical assistance as quickly as possible after an accident.
+            </li>
+
+        </ul>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ============================= -->
+<!-- FOOTER -->
+<!-- ============================= -->
+
+<footer>
+
+    © 2026 RAKSHAK -
+    Road Accident Emergency Portal
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        RAKSHAK - Accident Report
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #c62828;
+            color: white;
+            padding: 18px 30px;
+        }
+
+        nav h2 {
+            margin: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #c62828;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .location-box {
+            margin-top: 20px;
+            padding: 15px;
+
+            background: #f1f8ff;
+
+            border-radius: 10px;
+
+            border-left: 5px solid #1976d2;
+        }
+
+        .location-status {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: #c62828;
+        }
+
+        .loading {
+            color: #1976d2;
+        }
+
+        button {
+            width: 100%;
+
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #c62828;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #8e0000;
+        }
+
+        .back {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #c62828;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <h2>
+        🚑 RAKSHAK
+    </h2>
+
+</nav>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <h1>
+            🚨 Report Road Accident
+        </h1>
+
+
+        <form
+            id="reportForm"
+            action="/submit-report"
+            method="POST"
+        >
+
+
+            <!-- NAME -->
+
+            <label>
+                👤 Full Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter full name"
+                required
+            >
+
+
+            <!-- MOBILE -->
+
+            <label>
+                📱 Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                name="mobile"
+                placeholder="Enter mobile number"
+                required
+            >
+
+
+            <!-- LOCATION -->
+
+            <div class="location-box">
+
+                <div
+                    id="locationStatus"
+                    class="location-status loading"
+                >
+                    📍 Getting your current location...
+                </div>
+
+
+                <p id="locationText">
+                    Please allow location access.
+                </p>
+
+
+                <!-- Hidden latitude -->
+
+                <input
+                    type="hidden"
+                    name="latitude"
+                    id="latitude"
+                >
+
+
+                <!-- Hidden longitude -->
+
+                <input
+                    type="hidden"
+                    name="longitude"
+                    id="longitude"
+                >
+
+
+                <!-- Hidden location -->
+
+                <input
+                    type="hidden"
+                    name="location"
+                    id="location"
+                >
+
+            </div>
+
+
+            <!-- ACCIDENT TYPE -->
+
+            <label>
+                🚨 Accident Type
+            </label>
+
+            <select
+                name="accident_type"
+                required
+            >
+
+                <option value="">
+                    Select Accident Type
+                </option>
+
+                <option value="Vehicle Collision">
+                    🚗 Vehicle Collision
+                </option>
+
+                <option value="Bike Accident">
+                    🏍️ Bike Accident
+                </option>
+
+                <option value="Car Accident">
+                    🚙 Car Accident
+                </option>
+
+                <option value="Pedestrian Accident">
+                    🚶 Pedestrian Accident
+                </option>
+
+                <option value="Other">
+                    ⚠️ Other
+                </option>
+
+            </select>
+
+
+            <!-- DESCRIPTION -->
+
+            <label>
+                📝 Describe the Accident
+            </label>
+
+            <textarea
+                name="description"
+                placeholder="Describe what happened..."
+                required
+            ></textarea>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                type="submit"
+                id="submitButton"
+            >
+                🚨 Submit Accident Report
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="/dashboard"
+            class="back"
+        >
+            🏠 Back to Dashboard
+        </a>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    // ==================================================
+    // AUTOMATIC GPS LOCATION
+    // ==================================================
+
+    const locationStatus =
+        document.getElementById(
+            "locationStatus"
+        );
+
+    const locationText =
+        document.getElementById(
+            "locationText"
+        );
+
+    const latitudeInput =
+        document.getElementById(
+            "latitude"
+        );
+
+    const longitudeInput =
+        document.getElementById(
+            "longitude"
+        );
+
+    const locationInput =
+        document.getElementById(
+            "location"
+        );
+
+    const submitButton =
+        document.getElementById(
+            "submitButton"
+        );
+
+
+    // Disable submit until GPS is received
+
+    submitButton.disabled = true;
+
+    submitButton.style.opacity = "0.6";
+
+
+    // ==================================================
+    // GET LOCATION
+    // ==================================================
+
+    function getCurrentLocation() {
+
+
+        if (!navigator.geolocation) {
+
+            locationStatus.innerHTML =
+                "❌ Geolocation is not supported.";
+
+            locationStatus.className =
+                "location-status error";
+
+            return;
+        }
+
+
+        locationStatus.innerHTML =
+            "📍 Getting your current location...";
+
+        locationStatus.className =
+            "location-status loading";
+
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+
+                const latitude =
+                    position.coords.latitude;
+
+                const longitude =
+                    position.coords.longitude;
+
+
+                // Save GPS values
+
+                latitudeInput.value =
+                    latitude;
+
+                longitudeInput.value =
+                    longitude;
+
+
+                locationInput.value =
+                    latitude + ", " + longitude;
+
+
+                // Show location
+
+                locationStatus.innerHTML =
+                    "✅ Current Location Detected";
+
+                locationStatus.className =
+                    "location-status success";
+
+
+                locationText.innerHTML =
+                    "📍 Latitude: "
+                    + latitude
+                    + "<br>"
+                    + "📍 Longitude: "
+                    + longitude;
+
+
+                // Enable submit
+
+                submitButton.disabled = false;
+
+                submitButton.style.opacity = "1";
+
+
+            },
+
+
+            function(error) {
+
+
+                locationStatus.innerHTML =
+                    "❌ Location access denied.";
+
+                locationStatus.className =
+                    "location-status error";
+
+
+                if (error.code === 1) {
+
+                    locationText.innerHTML =
+                        "Please click the 🔒 icon near the browser address bar and allow Location.";
+                }
+
+                else if (error.code === 2) {
+
+                    locationText.innerHTML =
+                        "Location is currently unavailable. Please try again.";
+                }
+
+                else if (error.code === 3) {
+
+                    locationText.innerHTML =
+                        "Location request timed out. Please try again.";
+                }
+
+
+                submitButton.disabled = true;
+
+                submitButton.style.opacity = "0.6";
+
+            },
+
+
+            {
+                enableHighAccuracy: true,
+
+                timeout: 15000,
+
+                maximumAge: 0
+
+            }
+
+        );
+
+    }
+
+
+    // ==================================================
+    // START GPS
+    // ==================================================
+
+    getCurrentLocation();
+
+
+    // ==================================================
+    // REFRESH GPS BEFORE SUBMIT
+    // ==================================================
+
+    document
+        .getElementById("reportForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                if (
+                    !latitudeInput.value ||
+                    !longitudeInput.value
+                ) {
+
+                    event.preventDefault();
+
+                    alert(
+                        "📍 Current location is not available. Please allow location access."
+                    );
+
+                    getCurrentLocation();
+
+                }
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>

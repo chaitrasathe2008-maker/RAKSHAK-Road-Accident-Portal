@@ -1,0 +1,179 @@
+/* ==========================
+   RAKSHAK STYLE.CSS
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+/* Navigation */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#0d47a1;
+    padding:15px 50px;
+}
+
+.logo h2{
+    color:#fff;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+}
+
+.nav-links li{
+    margin-left:20px;
+}
+
+.nav-links li a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.nav-links li a:hover{
+    color:yellow;
+}
+
+/* Hero */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    background-image:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url("../images/bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    text-align:center;
+    color:white;
+    padding:20px;
+}
+
+.hero h1{
+
+    font-size:60px;
+    margin-bottom:20px;
+
+}
+
+.hero p{
+
+    font-size:24px;
+    margin-bottom:30px;
+
+}
+
+.btn{
+
+    background:red;
+    color:white;
+    padding:15px 35px;
+    border:none;
+    border-radius:5px;
+    font-size:20px;
+    cursor:pointer;
+    margin-right:15px;
+
+}
+
+.btn2{
+
+    background:green;
+    color:white;
+    padding:15px 35px;
+    border:none;
+    border-radius:5px;
+    font-size:20px;
+    cursor:pointer;
+
+}
+
+.btn:hover,
+.btn2:hover{
+
+    opacity:.8;
+
+}
+
+/* Services */
+
+.services{
+
+    padding:70px;
+    text-align:center;
+
+}
+
+.services h2{
+
+    color:#0d47a1;
+    margin-bottom:40px;
+    font-size:35px;
+
+}
+
+.service-box{
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+
+}
+
+.card{
+
+    width:250px;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+
+}
+
+.card h3{
+
+    color:#0d47a1;
+    margin-bottom:15px;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+    transition:.3s;
+
+}
+
+/* Footer */
+
+footer{
+
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:20px;
+
+}

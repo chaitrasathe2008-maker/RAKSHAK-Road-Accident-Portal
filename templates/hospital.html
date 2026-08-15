@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>RAKSHAK - Hospitals</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #c62828;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        nav h2 {
+            margin: 0;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #ffd54f;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .hospital-list {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hospital-card {
+            background: white;
+            width: 280px;
+            padding: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.12);
+
+            transition: 0.3s;
+        }
+
+        .hospital-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hospital-card h2 {
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+
+        .hospital-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .emergency {
+            color: green !important;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .call-btn,
+        .map-btn {
+            display: inline-block;
+
+            padding: 10px 15px;
+
+            color: white;
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+        }
+
+        .call-btn {
+            background: #c62828;
+        }
+
+        .call-btn:hover {
+            background: #8e0000;
+        }
+
+        .map-btn {
+            background: #1565c0;
+        }
+
+        .map-btn:hover {
+            background: #0d47a1;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+
+            margin-top: 40px;
+
+            color: #c62828;
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+
+            background: #222;
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <h2>
+            🚑 RAKSHAK
+        </h2>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+            <a href="/report">
+                Report
+            </a>
+
+            <a href="/hospital.html">
+                Hospital
+            </a>
+
+            <a href="/police">
+                Police
+            </a>
+
+            <a href="/emergency.html">
+                Emergency
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="container">
+
+
+        <h1>
+            🏥 Emergency Hospitals
+        </h1>
+<div style="text-align:center; margin:25px 0;">
+
+    <button
+        onclick="findNearbyHospitals()"
+        style="
+            padding:15px 25px;
+            background:#1565c0;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        "
+    >
+        📍 Find Nearby Hospitals
+    </button>
+
+    <p id="hospitalStatus" style="margin-top:15px; font-weight:bold;"></p>
+
+</div>
+
+        <p class="subtitle">
+
+            Find hospital information and
+            emergency medical assistance.
+
+        </p>
+
+
+
+        <div class="hospital-list">
+
+
+            <!-- HOSPITAL 1 -->
+
+            <div class="hospital-card">
+
+                <h2>
+                    🏥 Emergency Hospital
+                </h2>
+
+                <p>
+                    📍 Pune, Maharashtra
+                </p>
+
+                <p class="emergency">
+                    🚑 24/7 Emergency Service
+                </p>
+
+                <p>
+                    🩺 Emergency medical assistance
+                    available.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="tel:108"
+                        class="call-btn"
+                    >
+                        📞 Call 108
+                    </a>
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Pune"
+                        target="_blank"
+                        class="map-btn"
+                    >
+                        📍 Map
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HOSPITAL 2 -->
+
+            <div class="hospital-card">
+
+                <h2>
+                    🏥 City Hospital
+                </h2>
+
+                <p>
+                    📍 Mumbai, Maharashtra
+                </p>
+
+                <p class="emergency">
+                    🚑 Emergency Medical Service
+                </p>
+
+                <p>
+                    🩺 Emergency department available.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="tel:108"
+                        class="call-btn"
+                    >
+                        📞 Call 108
+                    </a>
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Mumbai"
+                        target="_blank"
+                        class="map-btn"
+                    >
+                        📍 Map
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HOSPITAL 3 -->
+
+            <div class="hospital-card">
+
+                <h2>
+                    🏥 District Hospital
+                </h2>
+
+                <p>
+                    📍 Nashik, Maharashtra
+                </p>
+
+                <p class="emergency">
+                    🚑 Emergency Department Available
+                </p>
+
+                <p>
+                    🩺 Medical emergency support available.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="tel:108"
+                        class="call-btn"
+                    >
+                        📞 Call 108
+                    </a>
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Nashik"
+                        target="_blank"
+                        class="map-btn"
+                    >
+                        📍 Map
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HOSPITAL 4 -->
+
+            <div class="hospital-card">
+
+                <h2>
+                    🏥 General Hospital
+                </h2>
+
+                <p>
+                    📍 Nagpur, Maharashtra
+                </p>
+
+                <p class="emergency">
+                    🚑 Emergency Service Available
+                </p>
+
+                <p>
+                    🩺 Accident and emergency support.
+                </p>
+
+                <div class="buttons">
+
+                    <a
+                        href="tel:108"
+                        class="call-btn"
+                    >
+                        📞 Call 108
+                    </a>
+
+                    <a
+                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Nagpur"
+                        target="_blank"
+                        class="map-btn"
+                    >
+                        📍 Map
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BACK -->
+
+        <a
+            href="/dashboard"
+            class="back"
+        >
+            🏠 Back to Dashboard
+        </a>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 RAKSHAK -
+        Road Accident Emergency Portal
+
+    </footer>
+<script>
+
+function findNearbyHospitals() {
+
+    const status =
+        document.getElementById("hospitalStatus");
+
+    status.innerHTML =
+        "📍 Getting your current location...";
+
+    if (!navigator.geolocation) {
+
+        status.innerHTML =
+            "❌ Location is not supported by this browser.";
+
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+            status.innerHTML =
+                "✅ Location detected. Opening nearby hospitals...";
+
+            const mapUrl =
+                "https://www.google.com/maps/search/?api=1&query=hospitals+" +
+                latitude +
+                "," +
+                longitude;
+
+            window.open(mapUrl, "_blank");
+        },
+
+        function(error) {
+
+            if (error.code === 1) {
+
+                status.innerHTML =
+                    "❌ Please allow location permission.";
+
+            } else {
+
+                status.innerHTML =
+                    "❌ Unable to detect location. Try again.";
+            }
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        }
+    );
+}
+
+</script>
+
+</body>
+
+</html>

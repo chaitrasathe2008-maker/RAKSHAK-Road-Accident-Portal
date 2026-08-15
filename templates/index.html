@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAKSHAK - Road Accident Emergency Portal</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: #c62828;
+            padding: 18px 35px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+
+            display: flex;
+            gap: 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #ffd54f;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            text-align: center;
+
+            padding: 100px 20px;
+
+            background: white;
+        }
+
+        .hero h1 {
+            color: #c62828;
+
+            font-size: 50px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+
+            margin-bottom: 15px;
+
+            color: #444;
+        }
+
+        .main-text {
+            margin-bottom: 30px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn {
+            display: inline-block;
+
+            background: #c62828;
+
+            color: white;
+
+            padding: 15px 30px;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #8e0000;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 25px;
+
+            padding: 50px 20px;
+
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            background: white;
+
+            width: 250px;
+
+            padding: 30px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.12);
+        }
+
+        .feature-card h2 {
+            color: #c62828;
+
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #666;
+
+            line-height: 1.5;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #222;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 20px;
+
+            margin-top: 30px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            nav {
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                justify-content: center;
+
+                gap: 12px;
+            }
+
+            .hero {
+                padding: 70px 15px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            🚑 RAKSHAK
+        </div>
+
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="/">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="/about.html">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="/report">
+                    Report
+                </a>
+            </li>
+
+            <li>
+                <a href="/hospital.html">
+                    Hospital
+                </a>
+            </li>
+
+            <li>
+                <a href="/police">
+                    Police
+                </a>
+            </li>
+
+            <li>
+                <a href="/emergency.html">
+                    Emergency
+                </a>
+            </li>
+
+            <li>
+                <a href="/contact.html">
+                    Contact
+                </a>
+            </li>
+
+            <li>
+                <a href="/login.html">
+                    🔐 Login
+                </a>
+            </li>
+
+            <li>
+                <a href="/register.html">
+                    📝 Register
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <h1>
+            🚑 RAKSHAK
+        </h1>
+
+
+        <p>
+            Road Accident Emergency Portal
+        </p>
+
+
+        <p class="main-text">
+
+            Report road accidents quickly
+            and get emergency assistance.
+
+        </p>
+
+
+        <a
+            href="/report"
+            class="btn"
+        >
+            🚨 Report Accident
+        </a>
+
+
+        <a
+            href="/emergency.html"
+            class="btn"
+        >
+            🚑 Emergency Help
+        </a>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features">
+
+
+        <!-- Emergency -->
+
+        <div class="feature-card">
+
+            <h2>
+                🚨 Emergency
+            </h2>
+
+            <p>
+
+                Get quick access to
+                emergency services
+                during road accidents.
+
+            </p>
+
+            <br>
+
+            <a
+                href="/emergency.html"
+                class="btn"
+            >
+                View Emergency
+            </a>
+
+        </div>
+
+
+        <!-- Hospital -->
+
+        <div class="feature-card">
+
+            <h2>
+                🏥 Hospital
+            </h2>
+
+            <p>
+
+                Find nearby hospitals
+                and emergency medical
+                assistance.
+
+            </p>
+
+            <br>
+
+            <a
+                href="/hospital.html"
+                class="btn"
+            >
+                View Hospitals
+            </a>
+
+        </div>
+
+
+        <!-- Police -->
+
+        <div class="feature-card">
+
+            <h2>
+                👮 Police
+            </h2>
+
+            <p>
+
+                Accident reports can
+                be viewed by the
+                police dashboard.
+
+            </p>
+
+            <br>
+
+            <a
+                href="/police"
+                class="btn"
+            >
+                Police Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- Report -->
+
+        <div class="feature-card">
+
+            <h2>
+                🚨 Accident Report
+            </h2>
+
+            <p>
+
+                Quickly submit an
+                accident report to
+                the RAKSHAK system.
+
+            </p>
+
+            <br>
+
+            <a
+                href="/report"
+                class="btn"
+            >
+                Report Now
+            </a>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 RAKSHAK -
+            Road Accident Emergency Portal
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - RAKSHAK</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+        }
+
+        nav {
+            background: #c62828;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #ffd54f;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #c62828;
+            margin-bottom: 30px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #c62828;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #c62828;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #8e0000;
+        }
+
+        .login-text {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-text a {
+            color: #c62828;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <div class="logo">
+        🚑 RAKSHAK
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="/">Home</a>
+        </li>
+
+        <li>
+            <a href="/about.html">About</a>
+        </li>
+
+        <li>
+            <a href="/report">Report</a>
+        </li>
+
+        <li>
+            <a href="/hospital.html">Hospital</a>
+        </li>
+
+        <li>
+            <a href="/police">Police</a>
+        </li>
+
+        <li>
+            <a href="/emergency.html">Emergency</a>
+        </li>
+
+        <li>
+            <a href="/contact.html">Contact</a>
+        </li>
+
+        <li>
+            <a href="/login.html">Login</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- ================= REGISTER ================= -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            📝 Create Account
+        </h1>
+
+
+        <!-- IMPORTANT -->
+        <!-- Flask ला data पाठवण्यासाठी -->
+
+        <form action="/register-user" method="POST">
+
+
+            <!-- FULL NAME -->
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                required
+            >
+
+
+            <!-- MOBILE -->
+
+            <input
+                type="tel"
+                name="mobile"
+                placeholder="Mobile Number"
+                required
+            >
+
+
+            <!-- EMAIL -->
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required
+            >
+
+
+            <!-- PASSWORD -->
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Create Password"
+                required
+            >
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                required
+            >
+
+
+            <!-- USER TYPE -->
+
+            <select
+                name="user_type"
+                required
+            >
+
+                <option value="">
+                    Select User Type
+                </option>
+
+                <option value="Normal User">
+                    Normal User
+                </option>
+
+                <option value="Blood Donor">
+                    Blood Donor
+                </option>
+
+            </select>
+
+
+            <!-- REGISTER BUTTON -->
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                Create Account
+            </button>
+
+
+        </form>
+
+
+        <!-- LOGIN LINK -->
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="/login.html">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 RAKSHAK - Road Accident Emergency Portal
+
+</footer>
+
+
+</body>
+
+</html>

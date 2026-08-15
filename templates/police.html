@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RAKSHAK - Police Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+        }
+
+        nav {
+            background: #c62828;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #ffd54f;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #c62828;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .dashboard {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .dashboard h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .dashboard p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: #c62828;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #8e0000;
+        }
+
+        footer {
+            margin-top: 100px;
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            🚑 RAKSHAK
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li>
+                <a href="/report">Report</a>
+            </li>
+
+            <li>
+                <a href="/hospital.html">Hospital</a>
+            </li>
+
+            <li>
+                <a href="/police.html">Police</a>
+            </li>
+
+            <li>
+                <a href="/emergency.html">Emergency</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <div class="container">
+
+        <h1>👮 Police Dashboard</h1>
+<div style="text-align:center; margin:25px 0;">
+
+    <button
+        onclick="findNearbyPolice()"
+        style="
+            padding:15px 25px;
+            background:#1565c0;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        "
+    >
+        📍 Find Nearby Police Stations
+    </button>
+
+    <p
+        id="policeStatus"
+        style="margin-top:15px; font-weight:bold;"
+    ></p>
+
+</div>
+        <p class="subtitle">
+            RAKSHAK Road Accident Emergency Management
+        </p>
+
+
+        <div class="dashboard">
+
+            <h2>🚨 Accident Reports</h2>
+
+            <p>
+                View all accident reports submitted through RAKSHAK.
+            </p>
+
+            <a href="/reports" class="btn">
+                📋 View Accident Reports
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+
+        © 2026 RAKSHAK - Road Accident Emergency Portal
+
+    </footer>
+<script>
+
+function findNearbyPolice() {
+
+    const status =
+        document.getElementById("policeStatus");
+
+    status.innerHTML =
+        "📍 Getting your current location...";
+
+    if (!navigator.geolocation) {
+
+        status.innerHTML =
+            "❌ Location is not supported by this browser.";
+
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+            status.innerHTML =
+                "✅ Location detected. Opening nearby police stations...";
+
+            const mapUrl =
+                "https://www.google.com/maps/search/?api=1&query=police+station+" +
+                latitude +
+                "," +
+                longitude;
+
+            window.open(mapUrl, "_blank");
+        },
+
+        function(error) {
+
+            if (error.code === 1) {
+
+                status.innerHTML =
+                    "❌ Please allow location permission.";
+
+            } else {
+
+                status.innerHTML =
+                    "❌ Unable to detect location. Try again.";
+            }
+
+        },
+
+        {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 0
+        }
+    );
+
+}
+
+</script>
+</body>
+
+</html>
