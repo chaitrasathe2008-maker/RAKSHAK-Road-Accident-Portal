@@ -1566,13 +1566,15 @@ def reports():
 # START SERVER
 # ==================================================
 
+
+
 if __name__ == "__main__":
+    import os
 
     print("====================================")
     print("🚑 RAKSHAK SERVER STARTED")
     print("====================================")
 
-    import os
     port = int(os.environ.get("PORT", 5000))
 
     print(f"🌐 Running on port {port}")
