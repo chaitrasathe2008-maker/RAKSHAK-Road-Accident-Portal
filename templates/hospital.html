@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>RAKSHAK - Hospitals</title>
 
     <style>
-
         * {
             box-sizing: border-box;
             font-family: Arial, sans-serif;
@@ -25,11 +21,9 @@
         nav {
             background: #c62828;
             padding: 18px 30px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             flex-wrap: wrap;
         }
 
@@ -69,7 +63,32 @@
         .subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+        }
+
+        .find-box {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .find-btn {
+            padding: 15px 25px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .find-btn:hover {
+            background: #0d47a1;
+        }
+
+        #hospitalStatus {
+            margin-top: 15px;
+            font-weight: bold;
         }
 
         .hospital-list {
@@ -83,12 +102,8 @@
             background: white;
             width: 280px;
             padding: 25px;
-
             border-radius: 12px;
-
-            box-shadow:
-                0 4px 15px rgba(0,0,0,0.12);
-
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
             transition: 0.3s;
         }
 
@@ -121,14 +136,10 @@
         .call-btn,
         .map-btn {
             display: inline-block;
-
             padding: 10px 15px;
-
             color: white;
             text-decoration: none;
-
             border-radius: 6px;
-
             font-weight: bold;
         }
 
@@ -151,378 +162,513 @@
         .back {
             display: block;
             text-align: center;
-
             margin-top: 40px;
-
             color: #c62828;
             text-decoration: none;
-
             font-weight: bold;
         }
 
         footer {
             margin-top: 50px;
-
             background: #222;
             color: white;
-
             text-align: center;
-
             padding: 20px;
         }
-
     </style>
-
 </head>
 
-
 <body>
-
 
     <!-- NAVBAR -->
 
     <nav>
 
-        <h2>
-            🚑 RAKSHAK
-        </h2>
+        <h2>🚑 RAKSHAK</h2>
 
         <div class="nav-links">
 
-            <a href="/">
-                Home
-            </a>
-
-            <a href="/dashboard">
-                Dashboard
-            </a>
-
-            <a href="/report">
-                Report
-            </a>
-
-            <a href="/hospital.html">
-                Hospital
-            </a>
-
-            <a href="/police">
-                Police
-            </a>
-
-            <a href="/emergency.html">
-                Emergency
-            </a>
+            <a href="/">Home</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/report">Report</a>
+            <a href="/hospital.html">Hospital</a>
+            <a href="/police">Police</a>
+            <a href="/emergency.html">Emergency</a>
 
         </div>
 
     </nav>
 
 
-
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
 
     <div class="container">
 
-
-        <h1>
-            🏥 Emergency Hospitals
-        </h1>
-<div style="text-align:center; margin:25px 0;">
-
-    <button
-        onclick="findNearbyHospitals()"
-        style="
-            padding:15px 25px;
-            background:#1565c0;
-            color:white;
-            border:none;
-            border-radius:8px;
-            font-size:16px;
-            font-weight:bold;
-            cursor:pointer;
-        "
-    >
-        📍 Find Nearby Hospitals
-    </button>
-
-    <p id="hospitalStatus" style="margin-top:15px; font-weight:bold;"></p>
-
-</div>
+        <h1>🏥 Emergency Hospitals</h1>
 
         <p class="subtitle">
-
-            Find hospital information and
-            emergency medical assistance.
-
+            Find hospitals near your current location.
         </p>
 
+        <div class="find-box">
 
+            <button
+                onclick="findNearbyHospitals()"
+                class="find-btn">
 
-        <div class="hospital-list">
+                📍 Find Nearby Hospitals
 
+            </button>
 
-            <!-- HOSPITAL 1 -->
-
-            <div class="hospital-card">
-
-                <h2>
-                    🏥 Emergency Hospital
-                </h2>
-
-                <p>
-                    📍 Pune, Maharashtra
-                </p>
-
-                <p class="emergency">
-                    🚑 24/7 Emergency Service
-                </p>
-
-                <p>
-                    🩺 Emergency medical assistance
-                    available.
-                </p>
-
-                <div class="buttons">
-
-                    <a
-                        href="tel:108"
-                        class="call-btn"
-                    >
-                        📞 Call 108
-                    </a>
-
-                    <a
-                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Pune"
-                        target="_blank"
-                        class="map-btn"
-                    >
-                        📍 Map
-                    </a>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- HOSPITAL 2 -->
-
-            <div class="hospital-card">
-
-                <h2>
-                    🏥 City Hospital
-                </h2>
-
-                <p>
-                    📍 Mumbai, Maharashtra
-                </p>
-
-                <p class="emergency">
-                    🚑 Emergency Medical Service
-                </p>
-
-                <p>
-                    🩺 Emergency department available.
-                </p>
-
-                <div class="buttons">
-
-                    <a
-                        href="tel:108"
-                        class="call-btn"
-                    >
-                        📞 Call 108
-                    </a>
-
-                    <a
-                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Mumbai"
-                        target="_blank"
-                        class="map-btn"
-                    >
-                        📍 Map
-                    </a>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- HOSPITAL 3 -->
-
-            <div class="hospital-card">
-
-                <h2>
-                    🏥 District Hospital
-                </h2>
-
-                <p>
-                    📍 Nashik, Maharashtra
-                </p>
-
-                <p class="emergency">
-                    🚑 Emergency Department Available
-                </p>
-
-                <p>
-                    🩺 Medical emergency support available.
-                </p>
-
-                <div class="buttons">
-
-                    <a
-                        href="tel:108"
-                        class="call-btn"
-                    >
-                        📞 Call 108
-                    </a>
-
-                    <a
-                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Nashik"
-                        target="_blank"
-                        class="map-btn"
-                    >
-                        📍 Map
-                    </a>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- HOSPITAL 4 -->
-
-            <div class="hospital-card">
-
-                <h2>
-                    🏥 General Hospital
-                </h2>
-
-                <p>
-                    📍 Nagpur, Maharashtra
-                </p>
-
-                <p class="emergency">
-                    🚑 Emergency Service Available
-                </p>
-
-                <p>
-                    🩺 Accident and emergency support.
-                </p>
-
-                <div class="buttons">
-
-                    <a
-                        href="tel:108"
-                        class="call-btn"
-                    >
-                        📞 Call 108
-                    </a>
-
-                    <a
-                        href="https://www.google.com/maps/search/?api=1&query=hospitals+Nagpur"
-                        target="_blank"
-                        class="map-btn"
-                    >
-                        📍 Map
-                    </a>
-
-                </div>
-
-            </div>
-
+            <p id="hospitalStatus"></p>
 
         </div>
 
 
+        <!-- HOSPITAL RESULTS -->
 
-        <!-- BACK -->
+        <div
+            class="hospital-list"
+            id="hospitalList">
 
-        <a
-            href="/dashboard"
-            class="back"
-        >
+        </div>
+
+
+        <a href="/dashboard" class="back">
             🏠 Back to Dashboard
         </a>
 
-
     </div>
-
 
 
     <!-- FOOTER -->
 
     <footer>
-
-        © 2026 RAKSHAK -
-        Road Accident Emergency Portal
-
+        © 2026 RAKSHAK - Road Accident Emergency Portal
     </footer>
-<script>
 
-function findNearbyHospitals() {
 
-    const status =
-        document.getElementById("hospitalStatus");
+    <!-- JAVASCRIPT -->
 
-    status.innerHTML =
-        "📍 Getting your current location...";
+    <script>
 
-    if (!navigator.geolocation) {
+        async function findNearbyHospitals() {
 
-        status.innerHTML =
-            "❌ Location is not supported by this browser.";
+            const status =
+                document.getElementById("hospitalStatus");
 
-        return;
-    }
+            const hospitalList =
+                document.getElementById("hospitalList");
 
-    navigator.geolocation.getCurrentPosition(
-
-        function(position) {
-
-            const latitude =
-                position.coords.latitude;
-
-            const longitude =
-                position.coords.longitude;
 
             status.innerHTML =
-                "✅ Location detected. Opening nearby hospitals...";
+                "📍 Detecting your current location...";
 
-            const mapUrl =
-                "https://www.google.com/maps/search/?api=1&query=hospitals+" +
-                latitude +
-                "," +
-                longitude;
+            hospitalList.innerHTML = "";
 
-            window.open(mapUrl, "_blank");
-        },
 
-        function(error) {
+            // Check browser support
 
-            if (error.code === 1) {
+            if (!navigator.geolocation) {
 
                 status.innerHTML =
-                    "❌ Please allow location permission.";
+                    "❌ Your browser does not support location.";
 
-            } else {
-
-                status.innerHTML =
-                    "❌ Unable to detect location. Try again.";
+                return;
             }
 
-        },
 
-        {
-            enableHighAccuracy: true,
-            timeout: 15000,
-            maximumAge: 0
+            // Get CURRENT location
+
+            navigator.geolocation.getCurrentPosition(
+
+                async function(position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    console.log(
+                        "CURRENT LOCATION:",
+                        latitude,
+                        longitude
+                    );
+
+
+                    status.innerHTML =
+                        "🔍 Searching hospitals near your location...";
+
+
+                    /*
+                        Search radius = 10 KM
+                    */
+
+                    const radius = 10000;
+
+
+                    /*
+                        Overpass API query
+
+                        IMPORTANT:
+                        latitude and longitude are taken
+                        from the user's CURRENT location.
+                    */
+
+                    const query = `
+                        [out:json][timeout:25];
+
+                        (
+                            node["amenity"="hospital"]
+                            (around:${radius},${latitude},${longitude});
+
+                            way["amenity"="hospital"]
+                            (around:${radius},${latitude},${longitude});
+
+                            relation["amenity"="hospital"]
+                            (around:${radius},${latitude},${longitude});
+                        );
+
+                        out center;
+                    `;
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "https://overpass-api.de/api/interpreter",
+                                {
+                                    method: "POST",
+                                    body: query
+                                }
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Hospital API failed"
+                            );
+
+                        }
+
+
+                        const data =
+                            await response.json();
+
+
+                        const hospitals =
+                            data.elements;
+
+
+                        if (!hospitals.length) {
+
+                            status.innerHTML =
+                                "❌ No hospitals found within 10 km.";
+
+                            return;
+                        }
+
+
+                        /*
+                            Calculate distance
+                        */
+
+                        function getDistance(
+                            lat1,
+                            lon1,
+                            lat2,
+                            lon2
+                        ) {
+
+                            const R = 6371;
+
+                            const dLat =
+                                (lat2 - lat1) *
+                                Math.PI / 180;
+
+                            const dLon =
+                                (lon2 - lon1) *
+                                Math.PI / 180;
+
+
+                            const a =
+                                Math.sin(dLat / 2) ** 2 +
+
+                                Math.cos(
+                                    lat1 * Math.PI / 180
+                                ) *
+
+                                Math.cos(
+                                    lat2 * Math.PI / 180
+                                ) *
+
+                                Math.sin(dLon / 2) ** 2;
+
+
+                            const c =
+                                2 *
+                                Math.atan2(
+                                    Math.sqrt(a),
+                                    Math.sqrt(1 - a)
+                                );
+
+
+                            return R * c;
+                        }
+
+
+                        /*
+                            Create hospital data
+                        */
+
+                        const hospitalData =
+                            hospitals
+                                .map(hospital => {
+
+                                    const lat =
+                                        hospital.lat ??
+                                        hospital.center?.lat;
+
+                                    const lon =
+                                        hospital.lon ??
+                                        hospital.center?.lon;
+
+
+                                    if (
+                                        lat === undefined ||
+                                        lon === undefined
+                                    ) {
+
+                                        return null;
+                                    }
+
+
+                                    const name =
+                                        hospital.tags?.name ||
+                                        "Unnamed Hospital";
+
+
+                                    const distance =
+                                        getDistance(
+                                            latitude,
+                                            longitude,
+                                            lat,
+                                            lon
+                                        );
+
+
+                                    const phone =
+                                        hospital.tags?.phone ||
+                                        hospital.tags?.["contact:phone"] ||
+                                        "";
+
+
+                                    return {
+
+                                        name: name,
+
+                                        lat: lat,
+
+                                        lon: lon,
+
+                                        distance: distance,
+
+                                        phone: phone
+
+                                    };
+
+                                })
+
+                                .filter(
+                                    hospital =>
+                                        hospital !== null
+                                );
+
+
+                        /*
+                            Sort nearest first
+                        */
+
+                        hospitalData.sort(
+                            (a, b) =>
+                                a.distance -
+                                b.distance
+                        );
+
+
+                        /*
+                            Show nearest 5
+                        */
+
+                        const nearest =
+                            hospitalData.slice(0, 5);
+
+
+                        /*
+                            Display results
+                        */
+
+                        nearest.forEach(
+                            hospital => {
+
+                                const card =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                card.className =
+                                    "hospital-card";
+
+
+                                /*
+                                    Google Maps Directions
+                                    FROM CURRENT LOCATION
+                                    TO HOSPITAL
+                                */
+
+                                const mapUrl =
+                                    "https://www.google.com/maps/dir/?api=1" +
+                                    "&origin=" +
+                                    latitude +
+                                    "," +
+                                    longitude +
+                                    "&destination=" +
+                                    hospital.lat +
+                                    "," +
+                                    hospital.lon;
+
+
+                                let phoneButton = "";
+
+
+                                if (hospital.phone) {
+
+                                    phoneButton = `
+                                        <a
+                                            href="tel:${hospital.phone}"
+                                            class="call-btn">
+
+                                            📞 Call
+
+                                        </a>
+                                    `;
+
+                                }
+
+
+                                card.innerHTML = `
+
+                                    <h2>
+                                        🏥 ${hospital.name}
+                                    </h2>
+
+                                    <p>
+                                        📍
+                                        ${hospital.distance.toFixed(2)}
+                                        km away
+                                    </p>
+
+                                    <p class="emergency">
+                                        🚑 Nearby Hospital
+                                    </p>
+
+                                    <div class="buttons">
+
+                                        ${phoneButton}
+
+                                        <a
+                                            href="${mapUrl}"
+                                            target="_blank"
+                                            class="map-btn">
+
+                                            📍 Directions
+
+                                        </a>
+
+                                    </div>
+
+                                `;
+
+
+                                hospitalList.appendChild(
+                                    card
+                                );
+
+                            }
+                        );
+
+
+                        status.innerHTML =
+                            `✅ Found ${nearest.length} nearby hospitals within 10 km.`;
+
+
+                    }
+
+                    catch (error) {
+
+                        console.error(error);
+
+                        status.innerHTML =
+                            "❌ Unable to find nearby hospitals. Please try again.";
+
+                    }
+
+                },
+
+
+                /*
+                    LOCATION ERROR
+                */
+
+                function(error) {
+
+                    if (error.code === 1) {
+
+                        status.innerHTML =
+                            "❌ Location permission denied. Please allow location access.";
+
+                    }
+
+                    else if (error.code === 2) {
+
+                        status.innerHTML =
+                            "❌ Your location could not be determined.";
+
+                    }
+
+                    else if (error.code === 3) {
+
+                        status.innerHTML =
+                            "⏳ Location request timed out. Try again.";
+
+                    }
+
+                    else {
+
+                        status.innerHTML =
+                            "❌ Unable to detect your current location.";
+
+                    }
+
+                },
+
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 20000,
+                    maximumAge: 0
+                }
+
+            );
+
         }
-    );
-}
 
-</script>
+    </script>
 
 </body>
 
