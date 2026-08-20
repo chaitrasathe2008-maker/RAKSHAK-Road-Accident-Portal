@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>RAKSHAK - Hospitals</title>
+    <title>RAKSHAK - Nearby Hospitals</title>
 
     <style>
         * {
@@ -21,9 +21,11 @@
         nav {
             background: #c62828;
             padding: 18px 30px;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             flex-wrap: wrap;
         }
 
@@ -100,10 +102,14 @@
 
         .hospital-card {
             background: white;
-            width: 280px;
+            width: 300px;
             padding: 25px;
+
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.12);
+
             transition: 0.3s;
         }
 
@@ -114,6 +120,7 @@
         .hospital-card h2 {
             color: #c62828;
             margin-bottom: 15px;
+            font-size: 20px;
         }
 
         .hospital-card p {
@@ -136,10 +143,14 @@
         .call-btn,
         .map-btn {
             display: inline-block;
+
             padding: 10px 15px;
+
             color: white;
             text-decoration: none;
+
             border-radius: 6px;
+
             font-weight: bold;
         }
 
@@ -162,17 +173,23 @@
         .back {
             display: block;
             text-align: center;
+
             margin-top: 40px;
+
             color: #c62828;
             text-decoration: none;
+
             font-weight: bold;
         }
 
         footer {
             margin-top: 50px;
+
             background: #222;
             color: white;
+
             text-align: center;
+
             padding: 20px;
         }
     </style>
@@ -189,10 +206,15 @@
         <div class="nav-links">
 
             <a href="/">Home</a>
+
             <a href="/dashboard">Dashboard</a>
+
             <a href="/report">Report</a>
+
             <a href="/hospital.html">Hospital</a>
+
             <a href="/police">Police</a>
+
             <a href="/emergency.html">Emergency</a>
 
         </div>
@@ -200,19 +222,23 @@
     </nav>
 
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
 
     <div class="container">
 
-        <h1>🏥 Emergency Hospitals</h1>
+        <h1>🏥 Nearby Emergency Hospitals</h1>
 
         <p class="subtitle">
             Find hospitals near your current location.
         </p>
 
+
+        <!-- FIND BUTTON -->
+
         <div class="find-box">
 
             <button
+                type="button"
                 onclick="findNearbyHospitals()"
                 class="find-btn">
 
@@ -225,17 +251,34 @@
         </div>
 
 
-        <!-- HOSPITAL RESULTS -->
+        <!-- HOSPITAL LIST -->
 
         <div
             class="hospital-list"
             id="hospitalList">
 
+            <div class="hospital-card">
+
+                <h2>🏥 Find Nearby Hospitals</h2>
+
+                <p>
+                    Click the button above to find hospitals
+                    near your current location.
+                </p>
+
+            </div>
+
         </div>
 
 
-        <a href="/dashboard" class="back">
+        <!-- BACK -->
+
+        <a
+            href="/dashboard"
+            class="back">
+
             🏠 Back to Dashboard
+
         </a>
 
     </div>
@@ -244,7 +287,10 @@
     <!-- FOOTER -->
 
     <footer>
-        © 2026 RAKSHAK - Road Accident Emergency Portal
+
+        © 2026 RAKSHAK -
+        Road Accident Emergency Portal
+
     </footer>
 
 
@@ -262,12 +308,12 @@
 
 
             status.innerHTML =
-                "📍 Detecting your current location...";
-
-            hospitalList.innerHTML = "";
+                "📍 Getting your current location...";
 
 
-            // Check browser support
+            /*
+             * Check browser location support
+             */
 
             if (!navigator.geolocation) {
 
@@ -278,7 +324,9 @@
             }
 
 
-            // Get CURRENT location
+            /*
+             * Get current location
+             */
 
             navigator.geolocation.getCurrentPosition(
 
@@ -292,359 +340,470 @@
 
 
                     console.log(
-                        "CURRENT LOCATION:",
-                        latitude,
+                        "Current Latitude:",
+                        latitude
+                    );
+
+                    console.log(
+                        "Current Longitude:",
                         longitude
                     );
 
 
                     status.innerHTML =
-                        "🔍 Searching hospitals near your location...";
+                        "🔍 Searching nearby hospitals...";
 
 
                     /*
-                        Search radius = 10 KM
-                    */
+                     * Search radius = 15 km
+                     */
 
-                    const radius = 10000;
+                    const radius = 15000;
 
 
                     /*
-                        Overpass API query
-
-                        IMPORTANT:
-                        latitude and longitude are taken
-                        from the user's CURRENT location.
-                    */
+                     * OpenStreetMap Overpass Query
+                     */
 
                     const query = `
-                        [out:json][timeout:25];
+[out:json][timeout:30];
 
-                        (
-                            node["amenity"="hospital"]
-                            (around:${radius},${latitude},${longitude});
+(
+    node["amenity"="hospital"]
+    (around:${radius},${latitude},${longitude});
 
-                            way["amenity"="hospital"]
-                            (around:${radius},${latitude},${longitude});
+    way["amenity"="hospital"]
+    (around:${radius},${latitude},${longitude});
 
-                            relation["amenity"="hospital"]
-                            (around:${radius},${latitude},${longitude});
-                        );
+    relation["amenity"="hospital"]
+    (around:${radius},${latitude},${longitude});
+);
 
-                        out center;
-                    `;
+out center;
+`;
 
 
-                    try {
+                    /*
+                     * Multiple API servers
+                     */
 
-                        const response =
-                            await fetch(
-                                "https://overpass-api.de/api/interpreter",
-                                {
-                                    method: "POST",
-                                    body: query
-                                }
+                    const servers = [
+
+                        "https://overpass-api.de/api/interpreter",
+
+                        "https://overpass.kumi.systems/api/interpreter"
+
+                    ];
+
+
+                    let data = null;
+
+
+                    /*
+                     * Try API servers one by one
+                     */
+
+                    for (const server of servers) {
+
+                        try {
+
+                            console.log(
+                                "Trying hospital server:",
+                                server
                             );
 
 
-                        if (!response.ok) {
+                            const response =
+                                await fetch(
+                                    server,
+                                    {
+                                        method: "POST",
 
-                            throw new Error(
-                                "Hospital API failed"
-                            );
+                                        headers: {
+                                            "Content-Type":
+                                                "text/plain;charset=UTF-8"
+                                        },
 
-                        }
-
-
-                        const data =
-                            await response.json();
-
-
-                        const hospitals =
-                            data.elements;
-
-
-                        if (!hospitals.length) {
-
-                            status.innerHTML =
-                                "❌ No hospitals found within 10 km.";
-
-                            return;
-                        }
-
-
-                        /*
-                            Calculate distance
-                        */
-
-                        function getDistance(
-                            lat1,
-                            lon1,
-                            lat2,
-                            lon2
-                        ) {
-
-                            const R = 6371;
-
-                            const dLat =
-                                (lat2 - lat1) *
-                                Math.PI / 180;
-
-                            const dLon =
-                                (lon2 - lon1) *
-                                Math.PI / 180;
-
-
-                            const a =
-                                Math.sin(dLat / 2) ** 2 +
-
-                                Math.cos(
-                                    lat1 * Math.PI / 180
-                                ) *
-
-                                Math.cos(
-                                    lat2 * Math.PI / 180
-                                ) *
-
-                                Math.sin(dLon / 2) ** 2;
-
-
-                            const c =
-                                2 *
-                                Math.atan2(
-                                    Math.sqrt(a),
-                                    Math.sqrt(1 - a)
-                                );
-
-
-                            return R * c;
-                        }
-
-
-                        /*
-                            Create hospital data
-                        */
-
-                        const hospitalData =
-                            hospitals
-                                .map(hospital => {
-
-                                    const lat =
-                                        hospital.lat ??
-                                        hospital.center?.lat;
-
-                                    const lon =
-                                        hospital.lon ??
-                                        hospital.center?.lon;
-
-
-                                    if (
-                                        lat === undefined ||
-                                        lon === undefined
-                                    ) {
-
-                                        return null;
+                                        body: query
                                     }
-
-
-                                    const name =
-                                        hospital.tags?.name ||
-                                        "Unnamed Hospital";
-
-
-                                    const distance =
-                                        getDistance(
-                                            latitude,
-                                            longitude,
-                                            lat,
-                                            lon
-                                        );
-
-
-                                    const phone =
-                                        hospital.tags?.phone ||
-                                        hospital.tags?.["contact:phone"] ||
-                                        "";
-
-
-                                    return {
-
-                                        name: name,
-
-                                        lat: lat,
-
-                                        lon: lon,
-
-                                        distance: distance,
-
-                                        phone: phone
-
-                                    };
-
-                                })
-
-                                .filter(
-                                    hospital =>
-                                        hospital !== null
                                 );
 
 
-                        /*
-                            Sort nearest first
-                        */
+                            if (!response.ok) {
 
-                        hospitalData.sort(
-                            (a, b) =>
-                                a.distance -
-                                b.distance
-                        );
-
-
-                        /*
-                            Show nearest 5
-                        */
-
-                        const nearest =
-                            hospitalData.slice(0, 5);
-
-
-                        /*
-                            Display results
-                        */
-
-                        nearest.forEach(
-                            hospital => {
-
-                                const card =
-                                    document.createElement(
-                                        "div"
-                                    );
-
-
-                                card.className =
-                                    "hospital-card";
-
-
-                                /*
-                                    Google Maps Directions
-                                    FROM CURRENT LOCATION
-                                    TO HOSPITAL
-                                */
-
-                                const mapUrl =
-                                    "https://www.google.com/maps/dir/?api=1" +
-                                    "&origin=" +
-                                    latitude +
-                                    "," +
-                                    longitude +
-                                    "&destination=" +
-                                    hospital.lat +
-                                    "," +
-                                    hospital.lon;
-
-
-                                let phoneButton = "";
-
-
-                                if (hospital.phone) {
-
-                                    phoneButton = `
-                                        <a
-                                            href="tel:${hospital.phone}"
-                                            class="call-btn">
-
-                                            📞 Call
-
-                                        </a>
-                                    `;
-
-                                }
-
-
-                                card.innerHTML = `
-
-                                    <h2>
-                                        🏥 ${hospital.name}
-                                    </h2>
-
-                                    <p>
-                                        📍
-                                        ${hospital.distance.toFixed(2)}
-                                        km away
-                                    </p>
-
-                                    <p class="emergency">
-                                        🚑 Nearby Hospital
-                                    </p>
-
-                                    <div class="buttons">
-
-                                        ${phoneButton}
-
-                                        <a
-                                            href="${mapUrl}"
-                                            target="_blank"
-                                            class="map-btn">
-
-                                            📍 Directions
-
-                                        </a>
-
-                                    </div>
-
-                                `;
-
-
-                                hospitalList.appendChild(
-                                    card
+                                console.log(
+                                    "Server failed:",
+                                    response.status
                                 );
+
+                                continue;
+                            }
+
+
+                            const result =
+                                await response.json();
+
+
+                            if (
+                                result &&
+                                Array.isArray(result.elements)
+                            ) {
+
+                                data = result;
+
+                                break;
 
                             }
-                        );
 
+                        }
 
-                        status.innerHTML =
-                            `✅ Found ${nearest.length} nearby hospitals within 10 km.`;
+                        catch (error) {
 
+                            console.log(
+                                "API error:",
+                                error
+                            );
+
+                        }
 
                     }
 
-                    catch (error) {
 
-                        console.error(error);
+                    /*
+                     * If both APIs fail
+                     */
+
+                    if (!data) {
 
                         status.innerHTML =
                             "❌ Unable to find nearby hospitals. Please try again.";
 
+                        return;
                     }
+
+
+                    const hospitals =
+                        data.elements;
+
+
+                    /*
+                     * No hospital found
+                     */
+
+                    if (hospitals.length === 0) {
+
+                        status.innerHTML =
+                            "❌ No hospitals found within 15 km.";
+
+                        return;
+                    }
+
+
+                    /*
+                     * Distance calculation
+                     */
+
+                    function getDistance(
+                        lat1,
+                        lon1,
+                        lat2,
+                        lon2
+                    ) {
+
+                        const R = 6371;
+
+
+                        const dLat =
+                            (lat2 - lat1) *
+                            Math.PI / 180;
+
+
+                        const dLon =
+                            (lon2 - lon1) *
+                            Math.PI / 180;
+
+
+                        const a =
+                            Math.sin(dLat / 2) ** 2 +
+
+                            Math.cos(
+                                lat1 * Math.PI / 180
+                            ) *
+
+                            Math.cos(
+                                lat2 * Math.PI / 180
+                            ) *
+
+                            Math.sin(dLon / 2) ** 2;
+
+
+                        const c =
+                            2 *
+                            Math.atan2(
+                                Math.sqrt(a),
+                                Math.sqrt(1 - a)
+                            );
+
+
+                        return R * c;
+
+                    }
+
+
+                    /*
+                     * Prepare hospital information
+                     */
+
+                    const hospitalData =
+                        hospitals
+                            .map(function(hospital) {
+
+                                const lat =
+                                    hospital.lat ??
+                                    hospital.center?.lat;
+
+
+                                const lon =
+                                    hospital.lon ??
+                                    hospital.center?.lon;
+
+
+                                if (
+                                    lat === undefined ||
+                                    lon === undefined
+                                ) {
+
+                                    return null;
+
+                                }
+
+
+                                const tags =
+                                    hospital.tags || {};
+
+
+                                const name =
+                                    tags.name ||
+                                    tags["name:en"] ||
+                                    "Unnamed Hospital";
+
+
+                                const phone =
+                                    tags.phone ||
+                                    tags["contact:phone"] ||
+                                    "";
+
+
+                                const distance =
+                                    getDistance(
+                                        latitude,
+                                        longitude,
+                                        lat,
+                                        lon
+                                    );
+
+
+                                return {
+
+                                    name: name,
+
+                                    lat: lat,
+
+                                    lon: lon,
+
+                                    phone: phone,
+
+                                    distance: distance
+
+                                };
+
+                            })
+
+                            .filter(function(hospital) {
+
+                                return hospital !== null;
+
+                            });
+
+
+                    /*
+                     * Sort nearest hospital first
+                     */
+
+                    hospitalData.sort(
+                        function(a, b) {
+
+                            return (
+                                a.distance -
+                                b.distance
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                     * Show nearest 5 hospitals
+                     */
+
+                    const nearest =
+                        hospitalData.slice(0, 5);
+
+
+                    /*
+                     * Clear old hospital cards
+                     */
+
+                    hospitalList.innerHTML = "";
+
+
+                    /*
+                     * Create hospital cards
+                     */
+
+                    nearest.forEach(
+                        function(hospital) {
+
+                            const card =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            card.className =
+                                "hospital-card";
+
+
+                            /*
+                             * Google Maps Directions
+                             */
+
+                            const mapUrl =
+                                "https://www.google.com/maps/dir/?api=1" +
+
+                                "&origin=" +
+                                encodeURIComponent(
+                                    latitude +
+                                    "," +
+                                    longitude
+                                ) +
+
+                                "&destination=" +
+                                encodeURIComponent(
+                                    hospital.lat +
+                                    "," +
+                                    hospital.lon
+                                );
+
+
+                            /*
+                             * Phone button
+                             */
+
+                            let phoneButton = "";
+
+
+                            if (hospital.phone) {
+
+                                phoneButton = `
+
+                                    <a
+                                        href="tel:${hospital.phone}"
+                                        class="call-btn">
+
+                                        📞 Call
+
+                                    </a>
+
+                                `;
+
+                            }
+
+
+                            /*
+                             * Hospital card
+                             */
+
+                            card.innerHTML = `
+
+                                <h2>
+                                    🏥 ${hospital.name}
+                                </h2>
+
+                                <p>
+                                    📍 ${hospital.distance.toFixed(2)}
+                                    km away
+                                </p>
+
+                                <p class="emergency">
+                                    🚑 Nearby Hospital
+                                </p>
+
+                                <div class="buttons">
+
+                                    ${phoneButton}
+
+                                    <a
+                                        href="${mapUrl}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="map-btn">
+
+                                        📍 Directions
+
+                                    </a>
+
+                                </div>
+
+                            `;
+
+
+                            hospitalList.appendChild(card);
+
+                        }
+                    );
+
+
+                    /*
+                     * Success message
+                     */
+
+                    status.innerHTML =
+                        `✅ Found ${nearest.length} nearby hospitals within 15 km.`;
 
                 },
 
 
                 /*
-                    LOCATION ERROR
-                */
+                 * Location error
+                 */
 
                 function(error) {
+
+                    console.error(
+                        "Location error:",
+                        error
+                    );
+
 
                     if (error.code === 1) {
 
                         status.innerHTML =
-                            "❌ Location permission denied. Please allow location access.";
+                            "❌ Please allow location permission.";
 
                     }
 
                     else if (error.code === 2) {
 
                         status.innerHTML =
-                            "❌ Your location could not be determined.";
+                            "❌ Location could not be determined.";
 
                     }
 
                     else if (error.code === 3) {
 
                         status.innerHTML =
-                            "⏳ Location request timed out. Try again.";
+                            "⏳ Location request timed out. Please try again.";
 
                     }
 
@@ -658,10 +817,17 @@
                 },
 
 
+                /*
+                 * Location settings
+                 */
+
                 {
                     enableHighAccuracy: true,
+
                     timeout: 20000,
+
                     maximumAge: 0
+
                 }
 
             );
