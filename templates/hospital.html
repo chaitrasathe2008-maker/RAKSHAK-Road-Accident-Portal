@@ -358,7 +358,7 @@
                      * Search radius = 15 km
                      */
 
-                    const radius = 15000;
+                    const radius = 5000;
 
 
                     /*
@@ -366,7 +366,7 @@
                      */
 
                     const query = `
-[out:json][timeout:30];
+[out:json][timeout:10];
 
 (
     node["amenity"="hospital"]
@@ -824,7 +824,7 @@ out center;
                 {
                     enableHighAccuracy: true,
 
-                    timeout: 20000,
+                    timeout: 10000,
 
                     maximumAge: 0
 
