@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import requests
 from datetime import datetime
 
 from flask import (
@@ -574,7 +575,85 @@ def submit_report():
 # ==================================================
 # EMERGENCY SOS
 # ==================================================
+@app.route("/api/nearby-hospitals")
+def nearby_hospitals():
 
+    latitude = request.args.get("lat")
+    longitude = request.args.get("lon")
+
+    if not latitude or not longitude:
+        return {"error": "Location missing"}, 400
+
+    try:
+
+        query = f"""
+        [out:json][timeout:15];
+
+        (
+          node["amenity"="hospital"](around:10000,{latitude},{longitude});
+          way["amenity"="hospital"](around:10000,{latitude},{longitude});
+          relation["amenity"="hospital"](around:10000,{latitude},{longitude});
+        );
+
+        out center tags;
+        """
+
+        response = requests.post(
+            "https://overpass-api.de/api/interpreter",
+            data=query,
+            headers={
+                "User-Agent": "RAKSHAK-Road-Accident-Portal/1.0"
+            },
+            timeout=20
+        )
+
+        response.raise_for_status()
+
+        data = response.json()
+
+        hospitals = []
+
+        for item in data.get("elements", []):
+
+            tags = item.get("tags", {})
+
+            name = tags.get(
+                "name",
+                "Nearby Hospital"
+            )
+
+            if item["type"] == "node":
+                lat = item.get("lat")
+                lon = item.get("lon")
+            else:
+                center = item.get("center", {})
+                lat = center.get("lat")
+                lon = center.get("lon")
+
+            if lat is None or lon is None:
+                continue
+
+            hospitals.append({
+                "name": name,
+                "lat": lat,
+                "lon": lon,
+                "address": tags.get(
+                    "addr:full",
+                    tags.get("addr:street", "")
+                )
+            })
+
+        return {
+            "hospitals": hospitals[:10]
+        }
+
+    except Exception as e:
+
+        print("HOSPITAL API ERROR:", str(e))
+
+        return {
+            "error": "Hospital search failed"
+        }, 500
 @app.route("/sos", methods=["POST"])
 def sos():
 
